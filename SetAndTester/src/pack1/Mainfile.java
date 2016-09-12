@@ -54,7 +54,14 @@ public class Mainfile {
     private static byte Menu() {
         Scanner scanner = new Scanner(System.in);
 
-        //todo list options
+        System.out.println("1. Add – Adds a number to the set \n" +
+        "2. Contains – Allows the user to see if the set contains a number \n" +
+        "3. Remove – Removes a number from the set \n" +
+        "4. Print – Prints all the numbers contained in the set \n" +
+        "5. Is Empty – Tells the user if the set was empty or not \n" +
+        "6. Clear – Empties the set \n" +
+        "7. Size – Tells the user the number of items in the set \n" +
+        "8. Exit \n");
 
         return scanner.nextByte();
     }
