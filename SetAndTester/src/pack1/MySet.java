@@ -1,9 +1,7 @@
 package pack1;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
-import java.util.Set;
 
 /**
  * Created on 9/12/2016, 2:04 PM
@@ -13,6 +11,7 @@ import java.util.Set;
  *         Part of project SetAndTester
  */
 
+@SuppressWarnings("CanBeFinal")
 public class MySet<E> implements SetInterface<E> {
 
     private ArrayList<E> internalSet;
@@ -25,25 +24,29 @@ public class MySet<E> implements SetInterface<E> {
     public boolean add(E o) {
         if (!this.internalSet.contains(o)) { //add if there isn't a duplicate value in the set
             internalSet.add(o);
+            return true;
         }
         return false;
     }
 
     @Override
     public void clear() {
-        for(int i =0; i< internalSet.size(); i++) {
-            internalSet.remove(i);
-        }
+        internalSet.clear();
     }
 
     @Override
     public boolean contains(E o) {
+        for (E anInternalSet : internalSet) {
+            if (anInternalSet.equals(o)) {
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return internalSet.isEmpty();
     }
 
     @Override
@@ -63,7 +66,10 @@ public class MySet<E> implements SetInterface<E> {
 
     @Override
     public Object[] toArray() {
-        //todo toarray
-        return null;
+        Object[] array = new Object[internalSet.size()];
+        for (int i = 0; i < internalSet.size(); i++) {
+            array[i] = internalSet.get(i);
+        }
+        return array;
     }
 }

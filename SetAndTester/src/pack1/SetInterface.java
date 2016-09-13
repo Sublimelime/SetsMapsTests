@@ -1,6 +1,7 @@
 package pack1;
 
 import java.util.*;
+@SuppressWarnings("ALL")
 public interface SetInterface<E>
 {
     boolean add(E o);
