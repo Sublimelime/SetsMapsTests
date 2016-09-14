@@ -13,7 +13,7 @@ import java.util.Scanner;
 @SuppressWarnings("WeakerAccess")
 public class Mainfile {
     public static void main(String[] args) {
-        //MyMap<MapEnt<K,V>> mMap = new MyMap<>();
+        MyMap<String, Integer> mMap = new MyMap<>();
 
         do {
             System.out.println("------------------------\nPlease select a choice:");

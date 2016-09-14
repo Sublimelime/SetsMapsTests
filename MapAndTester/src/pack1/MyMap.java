@@ -11,44 +11,66 @@ import java.util.ArrayList;
  */
 
 public class MyMap<K, V> implements MapInterface<K, V> {
+    private ArrayList<MapEnt<K, V>> internalMap;
+
+    public MyMap() {
+        this.internalMap = new ArrayList<>();
+    }
+
     @Override
     public void clear() {
-
+        internalMap.clear();
     }
 
     @Override
     public boolean containsKey(K key) {
-        return false;
+        boolean contains = false;
+        for (int i = 0; i < internalMap.size(); i++) {
+            contains = (internalMap.get(i).getKey() == key);
+        }
+        return contains;
     }
 
     @Override
     public boolean containsValue(V value) {
-        return false;
+        boolean contains = false;
+        for (int i = 0; i < internalMap.size(); i++) {
+            contains = (internalMap.get(i).getValue() == value);
+        }
+        return contains;
     }
 
     @Override
     public SetInterface<MapEnt<K, V>> entrySet() {
-        return null;
+        return null;  //todo ?
     }
 
     @Override
     public V get(K o) {
-        return null;
+        return findValueFromKey(o);
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return internalMap.isEmpty();
     }
 
     @Override
     public SetInterface<K> keySet() {
-        return null;
+        return null; //todo help
     }
 
     @Override
     public V put(K key, V value) {
-        return null;
+        V oldValue;
+        if (findIndexFromKey(key) == -1) { //if key not found
+            internalMap.add(new MapEnt<>(key, value));
+            return null;
+        } else { //key found
+            oldValue = internalMap.get(findIndexFromKey(key)).getValue();
+            internalMap.get(findIndexFromKey(key)).setValue(value);
+            return oldValue;
+        }
     }
 
     @Override
@@ -58,11 +80,44 @@ public class MyMap<K, V> implements MapInterface<K, V> {
 
     @Override
     public V remove(K key) {
-        return null;
+        V oldvalue;
+        if (findValueFromKey(key) == null)
+            return null; //if key not found
+        else {
+            oldvalue = internalMap.remove(findIndexFromKey(key)).getValue();
+        }
+
+        return oldvalue;
     }
 
     @Override
     public ArrayList<V> values() {
+        return null;
+    }
+
+    /**
+     * Finds the index a key is at.
+     *
+     * @param key Key to search for.
+     * @return int index
+     */
+    public int findIndexFromKey(K key) {
+        for (int i = 0; i < internalMap.size(); i++) {
+            if (internalMap.get(i).getKey() == key) return i;
+        }
+        return -1;
+    }
+
+    /**
+     * Finds the value in the arraylist from a key.
+     *
+     * @param key key to look for
+     * @return V value found.
+     */
+    public V findValueFromKey(K key) {
+        for (int i = 0; i < internalMap.size(); i++) {
+            if (internalMap.get(i).getKey() == key) return internalMap.get(i).getValue();
+        }
         return null;
     }
 }
