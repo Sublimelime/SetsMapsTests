@@ -10,6 +10,7 @@ import java.util.ArrayList;
  *         Part of project MapAndTester
  */
 
+@SuppressWarnings("Convert2streamapi")
 public class MyMap<K, V> implements MapInterface<K, V> {
     private ArrayList<MapEnt<K, V>> internalMap;
 
@@ -25,8 +26,8 @@ public class MyMap<K, V> implements MapInterface<K, V> {
     @Override
     public boolean containsKey(K key) {
         boolean contains = false;
-        for (int i = 0; i < internalMap.size(); i++) {
-            contains = (internalMap.get(i).getKey() == key);
+        for (MapEnt<K, V> anInternalMap : internalMap) {
+            contains = (anInternalMap.getKey() == key);
         }
         return contains;
     }
@@ -34,15 +35,19 @@ public class MyMap<K, V> implements MapInterface<K, V> {
     @Override
     public boolean containsValue(V value) {
         boolean contains = false;
-        for (int i = 0; i < internalMap.size(); i++) {
-            contains = (internalMap.get(i).getValue() == value);
+        for (MapEnt<K, V> anInternalMap : internalMap) {
+            contains = (anInternalMap.getValue() == value);
         }
         return contains;
     }
 
     @Override
-    public SetInterface<MapEnt<K, V>> entrySet() {
-        return null;  //todo ?
+    public MySet<MapEnt<K, V>> entrySet() {
+        MySet<MapEnt<K, V>> setOfEntries = new MySet<>();
+        for (MapEnt<K, V> anInternalMap : internalMap) {
+            setOfEntries.add(anInternalMap);
+        }
+        return setOfEntries;
     }
 
     @Override
@@ -56,8 +61,12 @@ public class MyMap<K, V> implements MapInterface<K, V> {
     }
 
     @Override
-    public SetInterface<K> keySet() {
-        return null; //todo help
+    public MySet<K> keySet() {
+        MySet<K> setOfKeys = new MySet<>();
+        for (MapEnt<K, V> anInternalMap : internalMap) {
+            setOfKeys.add(anInternalMap.getKey());
+        }
+        return setOfKeys;
     }
 
     @Override
@@ -75,7 +84,7 @@ public class MyMap<K, V> implements MapInterface<K, V> {
 
     @Override
     public int size() {
-        return 0;
+        return internalMap.size();
     }
 
     @Override
@@ -92,14 +101,18 @@ public class MyMap<K, V> implements MapInterface<K, V> {
 
     @Override
     public ArrayList<V> values() {
-        return null;
+        ArrayList<V> vals = new ArrayList<>();
+        for (MapEnt<K, V> anInternalMap : internalMap) {
+            vals.add(anInternalMap.getValue());
+        }
+        return vals;
     }
 
     /**
      * Finds the index a key is at.
      *
      * @param key Key to search for.
-     * @return int index
+     * @return int index, or -1 if not found
      */
     public int findIndexFromKey(K key) {
         for (int i = 0; i < internalMap.size(); i++) {
@@ -109,14 +122,14 @@ public class MyMap<K, V> implements MapInterface<K, V> {
     }
 
     /**
-     * Finds the value in the arraylist from a key.
+     * Finds the value in the arrayList from a key.
      *
      * @param key key to look for
-     * @return V value found.
+     * @return V value found, or null if not found.
      */
     public V findValueFromKey(K key) {
-        for (int i = 0; i < internalMap.size(); i++) {
-            if (internalMap.get(i).getKey() == key) return internalMap.get(i).getValue();
+        for (MapEnt<K, V> anInternalMap : internalMap) {
+            if (anInternalMap.getKey() == key) return anInternalMap.getValue();
         }
         return null;
     }

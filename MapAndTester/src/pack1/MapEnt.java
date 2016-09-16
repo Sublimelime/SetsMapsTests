@@ -27,6 +27,7 @@ public class MapEnt<K, V> {
 
     public boolean equals(Object o) {
         if (o instanceof MapEnt) {
+            //noinspection unchecked
             MapEnt<K, V> t = (MapEnt<K, V>) o;
             return getKey().equals(t.getValue());
         } else
