@@ -22,20 +22,56 @@ public class Mainfile {
 
             switch (choice) {
                 case 1:
+                    mMap.clear();
                     break;
                 case 2:
+                    System.out.println("Search for what key?");
+                    System.out.println("Found: " + mMap.containsKey(scan.nextLine()));
                     break;
                 case 3:
+                    System.out.println("Search for what value?");
+                    System.out.println("Found: " + mMap.containsValue(scan.nextInt()));
                     break;
                 case 4:
+                    System.out.println("Get from what key?");
+                    Integer tempGetVal = mMap.get(scan.nextLine());
+                    if(tempGetVal == null)
+                        System.out.println("Key not found.");
+                    else
+                        System.out.println(tempGetVal);
                     break;
                 case 5:
+                    System.out.println("What key?");
+                    String tempKey = scan.nextLine();
+                    System.out.println("What value?");
+                    Integer tempVal = scan.nextInt();
+                    Integer returnedVal = mMap.put(tempKey, tempVal);
+
+                    if (returnedVal == null)
+                        System.out.println("Added.");
+                    else
+                        System.out.println("Added, replaced value is: " + returnedVal);
                     break;
                 case 6:
+                    System.out.println("What key?");
+                    Integer returnedValRemoved = mMap.remove(scan.nextLine());
+
+                    if (returnedValRemoved == null)
+                        System.out.println("Key not found.");
+                    else
+                        System.out.println("Key removed, value was: " + returnedValRemoved);
                     break;
                 case 7:
+                    System.out.println("The size is: " + mMap.size());
                     break;
-                case 8: //exit game
+                case 8:
+                    System.out.println("Printing...");
+                    System.out.println(mMap);
+                    break;
+                case 9:
+                    System.out.println("The map is currently empty: " + mMap.isEmpty());
+                    break;
+                case 0: //Exit
                     System.out.println("Exiting...");
                     System.exit(0);
                     break;
@@ -53,15 +89,16 @@ public class Mainfile {
      */
     private static byte Menu() {
         Scanner scanner = new Scanner(System.in);
-        //todo fix menu
-        System.out.println("1. Add – Adds a number to the set \n" +
-                "2. Contains – Allows the user to see if the set contains a number \n" +
-                "3. Remove – Removes a number from the set \n" +
-                "4. Print – Prints all the numbers contained in the set \n" +
-                "5. Is Empty – Tells the user if the set was empty or not \n" +
-                "6. Clear – Empties the set \n" +
+        System.out.println("1. Clear \n" +
+                "2. Contains key \n" +
+                "3. Contains value \n" +
+                "4. Get \n" +
+                "5. Put \n" +
+                "6. Remove \n" +
                 "7. Size – Tells the user the number of items in the set \n" +
-                "8. Exit \n");
+                "8. Print all entries \n" +
+                "9. Is empty \n" +
+                "0. Exit");
 
         return scanner.nextByte();
     }

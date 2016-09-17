@@ -133,4 +133,13 @@ public class MyMap<K, V> implements MapInterface<K, V> {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        String finalString = "";
+        for(int i = 0; i<internalMap.size(); i++) {
+            finalString+= "{"+internalMap.get(i).toString()+"}\n";
+        }
+        return finalString;
+    }
 }
