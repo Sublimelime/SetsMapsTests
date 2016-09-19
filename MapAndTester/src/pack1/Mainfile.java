@@ -13,7 +13,7 @@ import java.util.Scanner;
 @SuppressWarnings("WeakerAccess")
 public class Mainfile {
     public static void main(String[] args) {
-        MyMap<String, Integer> mMap = new MyMap<>();
+        MyMap<Integer, String> mMap = new MyMap<>(); //Integers as keys, strings as values
 
         do {
             System.out.println("------------------------\nPlease select a choice:");
@@ -26,15 +26,15 @@ public class Mainfile {
                     break;
                 case 2:
                     System.out.println("Search for what key?");
-                    System.out.println("Found: " + mMap.containsKey(scan.nextLine()));
+                    System.out.println("Found: " + mMap.containsKey(scan.nextInt()));
                     break;
                 case 3:
                     System.out.println("Search for what value?");
-                    System.out.println("Found: " + mMap.containsValue(scan.nextInt()));
+                    System.out.println("Found: " + mMap.containsValue(scan.next()));
                     break;
                 case 4:
                     System.out.println("Get from what key?");
-                    Integer tempGetVal = mMap.get(scan.nextLine());
+                    String tempGetVal = mMap.findValueFromKey(scan.nextInt());
                     if(tempGetVal == null)
                         System.out.println("Key not found.");
                     else
@@ -42,10 +42,10 @@ public class Mainfile {
                     break;
                 case 5:
                     System.out.println("What key?");
-                    String tempKey = scan.nextLine();
+                    Integer tempKey = scan.nextInt();
                     System.out.println("What value?");
-                    Integer tempVal = scan.nextInt();
-                    Integer returnedVal = mMap.put(tempKey, tempVal);
+                    String tempVal = scan.next();
+                    String returnedVal = mMap.put(tempKey, tempVal);
 
                     if (returnedVal == null)
                         System.out.println("Added.");
@@ -54,7 +54,7 @@ public class Mainfile {
                     break;
                 case 6:
                     System.out.println("What key?");
-                    Integer returnedValRemoved = mMap.remove(scan.nextLine());
+                    String returnedValRemoved = mMap.remove(scan.nextInt());
 
                     if (returnedValRemoved == null)
                         System.out.println("Key not found.");
@@ -95,7 +95,7 @@ public class Mainfile {
                 "4. Get \n" +
                 "5. Put \n" +
                 "6. Remove \n" +
-                "7. Size – Tells the user the number of items in the set \n" +
+                "7. Size \n" +
                 "8. Print all entries \n" +
                 "9. Is empty \n" +
                 "0. Exit");

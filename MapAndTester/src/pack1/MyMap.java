@@ -27,7 +27,7 @@ public class MyMap<K, V> implements MapInterface<K, V> {
     public boolean containsKey(K key) {
         boolean contains = false;
         for (MapEnt<K, V> anInternalMap : internalMap) {
-            contains = (anInternalMap.getKey() == key);
+            contains = (anInternalMap.getKey().equals(key));
         }
         return contains;
     }
@@ -36,7 +36,7 @@ public class MyMap<K, V> implements MapInterface<K, V> {
     public boolean containsValue(V value) {
         boolean contains = false;
         for (MapEnt<K, V> anInternalMap : internalMap) {
-            contains = (anInternalMap.getValue() == value);
+            contains = (anInternalMap.getValue().equals(value));
         }
         return contains;
     }
@@ -116,7 +116,7 @@ public class MyMap<K, V> implements MapInterface<K, V> {
      */
     public int findIndexFromKey(K key) {
         for (int i = 0; i < internalMap.size(); i++) {
-            if (internalMap.get(i).getKey() == key) return i;
+            if (internalMap.get(i).getKey().equals(key)) return i;
         }
         return -1;
     }
@@ -129,7 +129,7 @@ public class MyMap<K, V> implements MapInterface<K, V> {
      */
     public V findValueFromKey(K key) {
         for (MapEnt<K, V> anInternalMap : internalMap) {
-            if (anInternalMap.getKey() == key) return anInternalMap.getValue();
+            if (anInternalMap.getKey().equals(key)) return anInternalMap.getValue();
         }
         return null;
     }

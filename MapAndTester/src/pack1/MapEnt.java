@@ -29,7 +29,7 @@ public class MapEnt<K, V> {
         if (o instanceof MapEnt) {
             //noinspection unchecked
             MapEnt<K, V> t = (MapEnt<K, V>) o;
-            return getKey().equals(t.getValue());
+            return getKey().equals(t.getKey());
         } else
             return false;
     }
