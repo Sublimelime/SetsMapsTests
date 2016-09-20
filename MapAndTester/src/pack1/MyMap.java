@@ -28,6 +28,7 @@ public class MyMap<K, V> implements MapInterface<K, V> {
         boolean contains = false;
         for (MapEnt<K, V> anInternalMap : internalMap) {
             contains = (anInternalMap.getKey().equals(key));
+            if (contains) break;
         }
         return contains;
     }
@@ -37,6 +38,7 @@ public class MyMap<K, V> implements MapInterface<K, V> {
         boolean contains = false;
         for (MapEnt<K, V> anInternalMap : internalMap) {
             contains = (anInternalMap.getValue().equals(value));
+            if (contains) break;
         }
         return contains;
     }
